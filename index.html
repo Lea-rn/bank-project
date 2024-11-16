@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Tiny5&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h3>log in to get started</h3>
+      <img height="60px" src="./logo.png" alt="" />
+      <div class="auth">
+        <input placeholder="USER" type="text" />
+        <input placeholder="PIN" type="text" />
+        <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+    </header>
+    <main>
+      <section class="main-header">
+        <div class="main-title">
+          <h2>Current balance</h2>
+          <p>As of 05/03/2037</p>
+        </div>
+        <h2 class="amount">0000 <i class="fa-solid fa-euro-sign"></i></h2>
+      </section>
+
+      <section class="movements">
+        <!-- left side :::  -->
+        <div class="left">
+          <div class="deposit-info">
+            <div class="deposit">
+              <span>2 DEPOSIT</span>
+              <span>3 DAYS AGO</span>
+            </div>
+            <p class="deposit-money">
+              4000 <i class="fa-solid fa-euro-sign"></i>
+            </p>
+          </div>
+
+          <div class="withdrow-info">
+            <div class="withdrow">
+              <span>1 withdrawal</span>
+              <span>24/01/2037</span>
+            </div>
+            <p class="deposit-money">
+              -378 <i class="fa-solid fa-euro-sign"></i>
+            </p>
+          </div>
+        </div>
+
+        <!-- right side  -->
+
+        <div class="right">
+          <!-- trasfert operation ::  -->
+          <div class="transfer-box">
+            <h3>Transfer money</h3>
+            <form>
+              <input type="text" />
+              <input type="text" />
+              <button><i class="fa-solid fa-arrow-right"></i></button>
+              <label>Transfer to</label>
+              <label>Amount</label>
+            </form>
+          </div>
+
+          <!-- loan operation :::  -->
+
+          <div class="loan-box">
+            <h3>Request Loan</h3>
+            <form>
+              <input type="text" />
+
+              <button><i class="fa-solid fa-arrow-right"></i></button>
+
+              <label>Amount</label>
+            </form>
+          </div>
+
+           <!-- close account ::  -->
+
+           <div class="close-box">
+            <h3>Close account</h3>
+            <form>
+              <input type="text" />
+              <input type="text" />
+
+              <button><i class="fa-solid fa-arrow-right"></i></button>
+
+              <label>Confirm User</label>
+              <label>Confirm Pin</label>
+            </form>
+          </div>
+
+
+
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
