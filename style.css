@@ -19,6 +19,9 @@ header {
 
 
 }
+.arrow{
+    cursor: pointer;
+}
 
 .auth input {
     width: 30%;
@@ -35,6 +38,7 @@ font-weight: 300;
 
 main {
     opacity: 1;
+    transition: 1s all;
 
 }
 
@@ -181,6 +185,7 @@ margin-left: 20px;
     height: 140px;
     margin-bottom: 10px;
     background: linear-gradient(to top left ,#78c850 , #34a853 );
+    position: relative;
 }
 
 
@@ -188,6 +193,7 @@ margin-left: 20px;
     border-radius: 5px;
     height: 140px;
     background: linear-gradient(to top left ,#F8333C , #FA757C );
+    position: relative;
 }
 
 .input-1{
@@ -213,6 +219,7 @@ margin-left: 20px;
     border: transparent;
     border-radius: 4px;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .box-title{
@@ -248,4 +255,100 @@ margin-left: 20px;
     font-size: 13px;
     font-weight: 400;
     margin-top:8px 
+}
+
+
+/* 
+close box  ::  */
+
+.close-form{
+    position: absolute;
+    top: 50px;
+}
+
+.label-close{
+    position: absolute;
+    left: 75px;
+    font-size: 13px;
+  font-weight: 400;
+  margin-top:8px ;
+}
+
+.label-amount-close{
+    position: absolute;
+    right: 125px;
+    font-size: 13px;
+    font-weight: 400;
+    margin-top:8px 
+}
+
+.close-title{
+    font-size: 15px;
+    font-weight: 500;
+   position: absolute;
+   top: 10px;
+   left: 28px;
+}
+
+/* loan box ::  */
+
+.loan-title{
+    font-size: 15px;
+    font-weight: 500;
+   position: absolute;
+   top: 10px;
+   left: 28px;
+}
+
+.label-amount-loan{
+    position: absolute;
+    left: 75px;
+    font-size: 13px;
+  font-weight: 400;
+  margin-top:8px ;
+}
+
+.loan-form{
+    position: absolute;
+    top: 50px;
+}
+
+/* footer */
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 72%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.values{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.in-container , .out-container, .interest-container{
+    margin-right: 25px;
+}
+
+.in , .out , .interest ,.logged-out{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.in-value , .interest-value {
+    color: #34a853 ;
+    font-size: 25px;
+}
+
+.out-value{
+    color: #F8333C;
+    font-size: 25px;
+}
+.time{
+    font-weight: 700;
 }

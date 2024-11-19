@@ -25,7 +25,7 @@
       <img height="60px" src="./logo.png" alt="" />
       <div class="auth">
         <input placeholder="USER" type="text" />
-        <input placeholder="PIN" type="text" />
+        <input placeholder="PIN" type="number" />
         <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
       </div>
     </header>
@@ -69,56 +69,66 @@
           <div class="transfer-box">
             <h3 class="box-title">Transfer money</h3>
             <form class="transfert-form">
-<div class="input-container">
+              <div class="input-container">
                 <input class="input-1" type="text" />
-                <input class="input-2" type="text" />
-                <button class="btn-movement"><i class="fa-solid fa-arrow-right"></i></button>
-</div>
-          <div class="label-container">
+                <input class="input-2" type="number" />
+                <button class="btn-movement">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="label-container">
                 <label class="label-transfer">Transfer to</label>
                 <label class="laber-amount-transfer">Amount</label>
-          </div>
+              </div>
             </form>
           </div>
 
           <!-- loan operation :::  -->
 
           <div class="loan-box">
-            <h3>Request Loan</h3>
-            <form>
-              <input class="input-1" type="text" />
+            <h3 class="loan-title">Request Loan</h3>
+            <div class="loan-form">
+              <input class="input-1" type="number" />
 
-              <button class="btn-movement"><i class="fa-solid fa-arrow-right"></i></button>
+              <button class="btn-movement">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
 
-              <div>
-                <label>Amount</label>
+              <div class="label-container">
+                <label class="label-amount-loan">Amount</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- close account ::  -->
+
+          <div class="close-box">
+            <h3 class="close-title">Close account</h3>
+            <form class="close-form">
+              <div class="input-container">
+                <input class="input-1" type="text" />
+                <input class="input-2" type="number" />
+                <button class="btn-movement">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+
+              <div class="label-container">
+                <label class="label-close">Confirm User</label>
+                <label class="label-amount-close">Confirm Pin</label>
               </div>
             </form>
           </div>
-
-           <!-- close account ::  -->
-
-           <div class="close-box">
-            <h3 >Close account</h3>
-            <form>
-       <div class="input-container">
-               <input class="input-1" type="text" />
-               <input class="input-2" type="text" />
-               <button class="btn-movement"><i class="fa-solid fa-arrow-right"></i></button>
-       </div>
-
-           
-
-      <div class="label-container">
-                <label>Confirm User</label>
-                <label>Confirm Pin</label>
-      </div>
-            </form>
-          </div>
-
-
-
         </div>
+      </section>
+      <section class="footer">
+       <div class="values">
+   <div class="in-container"><span class="in">IN</span> <span class="in-value">0000 <i class="fa-solid fa-euro-sign"></i></span></div>
+   <div class="out-container"><span class="out">OUT</span> <span class="out-value">0000 <i class="fa-solid fa-euro-sign"></i></span></div>
+   <div class="interest-container"><span class="interest">INTEREST</span> <span class="interest-value">0000 <i class="fa-solid fa-euro-sign"></i></span></div>
+       </div>
+       <span class="sort"> <i class="fa-solid fa-arrow-down"></i> SORT</span>
+       <p class="logged-out"> you will be logged out in  <span class="time">05:00</span></p>
       </section>
     </main>
   </body>
