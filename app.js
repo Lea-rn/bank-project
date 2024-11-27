@@ -32,6 +32,7 @@ const accounts = [account1, account2, account3, account4];
 
 //////import elements ::
 const movementContainer = document.querySelector(".left");
+const balanceAmount = document.querySelector(".amount")
 // console.log(movementContainer)
 // const html = movementContainer.innerHTML
 // console.log("html" , html)
@@ -58,7 +59,43 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account3.movements);
+displayMovements(account1.movements);
+
+
+// [200, 450, -400, 3000, -650, -130, 70, 1300]
+
+///// alt gr + e  === > €
+const displayBalance = function (movements){      
+ const balance = movements.reduce((acc,mov)=> acc + mov , 0) 
+ balanceAmount.textContent = `${balance} €`  
+
+}
+
+// const displayBalance = function (movements){      
+//   const balance = movements.reduce(function (acc,mov){ return acc + mov  },0) 
+//   balanceAmount.textContent = `${balance} €`
+ 
+//  }
+
+
+displayBalance(account1.movements)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////lectures :::::::::::::::///////////////////////////////////////////////////
@@ -177,28 +214,45 @@ displayMovements(account3.movements);
 
 ///////// reduce ///////////// ::: 
 
-////// matraja3ech array .... 
-//// accumulator ===> snowball
-
-// const numbers = [3,1,4,3,2] ; 
-// const sum = numbers.reduce(function(acc,ele,i){
-//    return acc*ele
-// },1)
-
-// ///36
-// // //// 0+3 
-// // ////3+1 
-// // /// 4+4 
-// console.log(sum) ; 
-
-
-////// exemple with forEach
-
 // const numbers = [3,1,4,3,2] ; 
 
-// let sum = 0 ; 
+// const result = numbers.reduce(function(acc,ele){
+// return acc+ele 
+// },0)
+
+
+// console.log(result) ; 
+
+////// with simple forEach ::: 
+
+//  let sum = 0 ; 
+  
 // numbers.forEach(function(ele){
-//   sum+= ele
+// //  sum = sum + ele
+// sum+=ele
 // })
 
-// console.log(sum) ; 
+// console.log(sum)
+///// 3 +  0 acc ===> 3 
+///// 3 +1 acc ===> 4 ; 
+////// 4 + 4 acc ===> 8 ; 
+////// 8 + 3 acc ===> 11 ;
+////// 11 + 2 acc ===> 13 ;
+
+
+//////// get max using reduce ::: 
+
+  const numbers = [-10,-50,-300,-50,-1000,-200,-2000] ; 
+
+  const max = numbers.reduce((acc,num)=>{
+   console.log(acc)
+   if(acc>num) return acc ; 
+   else return num ;
+
+  },numbers[0])
+
+///// 10 > 10 ==== > return num ==> 10  ====> acc = 10 ;
+///// ===> return 50 ====> acc = 50 ; 
+///// acc ===> 300 ; 
+///// acc ===> 300
+  console.log(max)
