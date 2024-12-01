@@ -32,12 +32,18 @@ const accounts = [account1, account2, account3, account4];
 /////////////////////////////////////////////////////////////
 //////import elements ::
 const movementContainer = document.querySelector(".left");
-const balanceAmount = document.querySelector(".amount")
-const inn = document.querySelector(".in-value")
-const out = document.querySelector(".out-value")
-const int = document.querySelector(".interest-value")
+const balanceAmount = document.querySelector(".amount");
+const inn = document.querySelector(".in-value");
+const out = document.querySelector(".out-value");
+const int = document.querySelector(".interest-value");
+const loginUserInput = document.querySelector(".user-input");
 
+const pinUserInput = document.querySelector(".user-pin");
 
+const mainPage = document.querySelector(".app");
+
+const btnLogin = document.querySelector(".arrow");
+const welcomeMessage = document.querySelector(".welcome");
 
 //////////////////////////////////////////////////////////////////////////
 // console.log(movementContainer)
@@ -46,10 +52,10 @@ const int = document.querySelector(".interest-value")
 // const text = movementContainer.textContent
 // console.log("text : ", text)
 
-const displayMovements = function (movements) {
+const displayMovements = function (acc) {
   movementContainer.innerHTML = "";
 
-  movements.forEach(function (mov, i) {
+  acc.movements.forEach(function (mov, i) {
     let type = mov > 0 ? "deposit" : "withdrow";
     let html = `
                <div class="${type}-info">
@@ -66,65 +72,87 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
+// displayMovements(account1.movements);
 
+/////////////// userName new key functionnality :::
+
+const displayUsername = function (accounts) {
+  accounts.forEach((acc) => {
+    acc.userName = acc.owner ////// SARAH SMITH
+      .toLowerCase() //////// sarah smith
+      .split(" ") ///// [sarah,smith]
+      .map((ele) => ele[0]) //// [s,s]
+      .join(""); ////// ss
+  });
+};
+
+displayUsername(accounts);
 
 // [200, 450, -400, 3000, -650, -130, 70, 1300]
 
 ///// alt gr + e  === > €
-const displayBalance = function (movements){      
- const balance = movements.reduce((acc,mov)=> acc + mov , 0) 
- balanceAmount.textContent = `${balance} €`  
+const displayBalance = function (acc) {
+  const balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  balanceAmount.textContent = `${balance} €`;
+};
 
-}
-
-// const displayBalance = function (movements){      
-//   const balance = movements.reduce(function (acc,mov){ return acc + mov  },0) 
+// const displayBalance = function (movements){
+//   const balance = movements.reduce(function (acc,mov){ return acc + mov  },0)
 //   balanceAmount.textContent = `${balance} €`
- 
+
 //  }
 
+// displayBalance(account1.movements);
 
-displayBalance(account1.movements)
+////// display summary :::
 
+const calcDisplaySummary = function (acc) {
+  const inComes = acc.movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, ele) => acc + ele, 0);
+  inn.textContent = `${inComes} €`;
 
+  const outmoney = acc.movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, ele) => acc + ele, 0);
+  out.textContent = `${Math.abs(outmoney)} €`;
 
+  const intrest = acc.movements
+    .filter((mov) => mov > 0)
+    .map((deposit) =>{
+      console.log(acc.interestRate)
+      return (deposit * acc.interestRate) / 100
 
-////// display summary ::: 
+    } )
+    .filter((ele, i, arr) => {
+      // console.log("jey mel map :" , arr)
+      return ele > 1;
+    })
+    .reduce((acc, ele) => acc + ele, 0);
+  int.textContent = `${intrest} €`;
+};
 
-  const calcDisplaySummary = function(acc){
-   const inComes = acc.filter((mov)=>mov>0)
-   .reduce((acc,ele)=>acc+ele,0)
-   inn.textContent = `${inComes} €`
+// calcDisplaySummary(account1.movements);
 
-   const outmoney = acc.filter((mov)=>mov<0)
-   .reduce((acc,ele)=>acc+ele,0)
-   out.textContent = `${Math.abs(outmoney)} €`
+//////// display login :::
+let currentAccount;
 
-   const intrest = acc.filter((mov)=>mov>0)
-   .map((deposit)=>(deposit*1.2)/100)
-   .filter((ele,i,arr)=>{
-    console.log("jey mel map :" , arr)
-    return ele>1})
-   .reduce((acc,ele)=>acc+ele,0)
-   int.textContent = `${intrest} €`
-
+btnLogin.addEventListener("click", function () {
+  currentAccount = accounts.find(
+    (acc) => acc.userName === loginUserInput.value
+  );
+  console.log(currentAccount);
+  if (currentAccount?.pin === Number(pinUserInput.value)) {
+    welcomeMessage.textContent = `Welcome back ${
+      currentAccount.owner.split(" ")[0]
+    }`;
+    mainPage.style.opacity = 1;
+    displayMovements(currentAccount);
+    displayBalance(currentAccount);
+    calcDisplaySummary(currentAccount);
   }
-
-
-  calcDisplaySummary(account1.movements)
-
-
-
-
-
-
-
-
-
-
-
-
+  loginUserInput.value = pinUserInput.value = "" ; 
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////lectures :::::::::::::::///////////////////////////////////////////////////
@@ -197,28 +225,25 @@ displayBalance(account1.movements)
 //    ///// stw
 // console.log(userName);
 
+////// filter //////////////////// ::::
 
-////// filter //////////////////// :::: 
+// const numbers = [3,1,4,3,2] ;
 
-
-// const numbers = [3,1,4,3,2] ; 
-
-//// with callback function ::: 
+//// with callback function :::
 
 // const numbersGreaterThanTwo = numbers.filter(function(ele){
-//    return ele > 2 
+//    return ele > 2
 // })
 
 // console.log(numbers)
 // console.log(numbersGreaterThanTwo)
 
-/// with arrow function ::: 
+/// with arrow function :::
 // const numbersGreaterThanTwo = numbers.filter(ele=> ele >2 )
 // console.log(numbersGreaterThanTwo)
 
-
-////// with for loop ::: 
-// const numbersGreaterThanTwo = [] ; 
+////// with for loop :::
+// const numbersGreaterThanTwo = [] ;
 
 // for (let i = 0 ; i<numbers.length ; i++) {
 //      if (numbers[i]>2){
@@ -228,100 +253,92 @@ displayBalance(account1.movements)
 
 // console.log(numbersGreaterThanTwo)
 
+///// second exemple (filter) ::::
 
-///// second exemple (filter) :::: 
-
-// const movementss = [100,-50,10,230,-500,40] 
+// const movementss = [100,-50,10,230,-500,40]
 
 // const deposit = movementss.filter(ele=>ele>0)
-// console.log(deposit)  
-
+// console.log(deposit)
 
 // const withdraw = movementss.filter(ele=>ele<0)
-// console.log(withdraw)  
+// console.log(withdraw)
 
+///////// reduce ///////////// :::
 
-///////// reduce ///////////// ::: 
-
-// const numbers = [3,1,4,3,2] ; 
+// const numbers = [3,1,4,3,2] ;
 
 // const result = numbers.reduce(function(acc,ele){
-// return acc+ele 
+// return acc+ele
 // },0)
 
+// console.log(result) ;
 
-// console.log(result) ; 
+////// with simple forEach :::
 
-////// with simple forEach ::: 
+//  let sum = 0 ;
 
-//  let sum = 0 ; 
-  
 // numbers.forEach(function(ele){
 // //  sum = sum + ele
 // sum+=ele
 // })
 
 // console.log(sum)
-///// 3 +  0 acc ===> 3 
-///// 3 +1 acc ===> 4 ; 
-////// 4 + 4 acc ===> 8 ; 
+///// 3 +  0 acc ===> 3
+///// 3 +1 acc ===> 4 ;
+////// 4 + 4 acc ===> 8 ;
 ////// 8 + 3 acc ===> 11 ;
 ////// 11 + 2 acc ===> 13 ;
 
+//////// get max using reduce :::
 
-//////// get max using reduce ::: 
+// const numbers = [-10,-50,-300,-50,-1000,-200,-2000] ;
 
-  // const numbers = [-10,-50,-300,-50,-1000,-200,-2000] ; 
+// const max = numbers.reduce((acc,num)=>{
+//  console.log(acc)
+//  if(acc>num) return acc ;
+//  else return num ;
 
-  // const max = numbers.reduce((acc,num)=>{
-  //  console.log(acc)
-  //  if(acc>num) return acc ; 
-  //  else return num ;
-
-  // },numbers[0])
+// },numbers[0])
 
 ///// 10 > 10 ==== > return num ==> 10  ====> acc = 10 ;
-///// ===> return 50 ====> acc = 50 ; 
-///// acc ===> 300 ; 
+///// ===> return 50 ====> acc = 50 ;
+///// acc ===> 300 ;
 ///// acc ===> 300
-  // console.log(max)
+// console.log(max)
 
-  ////////// chaining -- pipeline
- 
-  //  const movements = [100,-200,500,-80,600] ; 
-  //   const eurToDinar = 3.3 ; 
-   ///// sum of deposit on tunisian dinar
+////////// chaining -- pipeline
 
-  //  const deposit = movements.filter((ele)=>ele>0)
-  //  console.log(deposit)
+//  const movements = [100,-200,500,-80,600] ;
+//   const eurToDinar = 3.3 ;
+///// sum of deposit on tunisian dinar
 
-  /////// [100,500,600]
+//  const deposit = movements.filter((ele)=>ele>0)
+//  console.log(deposit)
 
-  //  const depositonDinar = deposit.map((ele)=>ele*eurToDinar)
-  //  console.log(depositonDinar)
- 
+/////// [100,500,600]
 
-  //  const sum = depositonDinar.reduce((acc,ele)=>acc+ele,0)
-  //  console.log(sum)
+//  const depositonDinar = deposit.map((ele)=>ele*eurToDinar)
+//  console.log(depositonDinar)
 
-  //////// with chaining ::: 
+//  const sum = depositonDinar.reduce((acc,ele)=>acc+ele,0)
+//  console.log(sum)
 
-  //  const sum = movements.filter((ele)=>ele>0)
-  //  .map((ele,i,arr)=>{
-  //   console.log("jey mel filter :" , arr)
-  //   return ele*eurToDinar
-  // })
-  //  .reduce((acc,ele,i,arr)=>{
-  // console.log("jey mel map:" , arr)
-  //   return acc+ele
-  // },0)
-  //  console.log(sum)
+//////// with chaining :::
 
+//  const sum = movements.filter((ele)=>ele>0)
+//  .map((ele,i,arr)=>{
+//   console.log("jey mel filter :" , arr)
+//   return ele*eurToDinar
+// })
+//  .reduce((acc,ele,i,arr)=>{
+// console.log("jey mel map:" , arr)
+//   return acc+ele
+// },0)
+//  console.log(sum)
 
+////////////// find ///////////////////////
 
-  ////////////// find /////////////////////// 
-
-//  const numbers = [10,20,30,40,20] 
+//  const numbers = [10,20,30,40,20]
 
 //  const result = numbers.find(function(ele,i){
 // console.log(i)
@@ -331,21 +348,21 @@ displayBalance(account1.movements)
 //  console.log(result)
 
 const dataBase = [
- {
-  userName : "eya" , 
-  image : "photo1"
- } , 
- {
-  userName : "marwa" , 
-  image : "photo2"
- } ,
- {
-  userName : "nessrine" , 
-  image : "photo3"
- }
-]
+  {
+    userName: "eya",
+    image: "photo1",
+  },
+  {
+    userName: "marwa",
+    image: "photo2",
+  },
+  {
+    userName: "nessrine",
+    image: "photo3",
+  },
+];
 
-// const userName =  [] ; 
+// const userName =  [] ;
 // dataBase.forEach((ele)=>{
 //   userName.push(ele.userName)
 // })
@@ -354,3 +371,5 @@ const dataBase = [
 
 // const result = dataBase.find((ele)=>ele.image === "photo3")
 // console.log(result)
+
+//// ? optional chaining ..
