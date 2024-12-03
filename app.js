@@ -26,7 +26,10 @@ const account4 = {
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1, /// %
   pin: 4444,
+  
 };
+
+
 
 const accounts = [account1, account2, account3, account4];
 /////////////////////////////////////////////////////////////
@@ -44,6 +47,23 @@ const mainPage = document.querySelector(".app");
 
 const btnLogin = document.querySelector(".arrow");
 const welcomeMessage = document.querySelector(".welcome");
+
+////// import transfert element : 
+   
+const transfertToInput = document.querySelector(".transfer-to-input") ; 
+const transfertAmountInput = document.querySelector(".transfer-amount-input") ; 
+const transfertButton = document.querySelector(".transfer-btn") ; 
+
+///// import close element :: 
+const closeUserInput = document.querySelector(".close-input") ; 
+const closePinInput = document.querySelector(".close-pin") ;
+const closeButton = document.querySelector(".btn-close") ; 
+
+
+
+
+
+
 
 //////////////////////////////////////////////////////////////////////////
 // console.log(movementContainer)
@@ -94,6 +114,7 @@ displayUsername(accounts);
 const displayBalance = function (acc) {
   const balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
   balanceAmount.textContent = `${balance} €`;
+  acc.credit = balance ; 
 };
 
 // const displayBalance = function (movements){
@@ -132,6 +153,12 @@ const calcDisplaySummary = function (acc) {
   int.textContent = `${intrest} €`;
 };
 
+const updateUi = function (acc){
+ displayBalance(acc) ; 
+ calcDisplaySummary(acc);
+ displayMovements(acc) ; 
+}
+
 // calcDisplaySummary(account1.movements);
 
 //////// display login :::
@@ -147,12 +174,50 @@ btnLogin.addEventListener("click", function () {
       currentAccount.owner.split(" ")[0]
     }`;
     mainPage.style.opacity = 1;
-    displayMovements(currentAccount);
-    displayBalance(currentAccount);
-    calcDisplaySummary(currentAccount);
+updateUi(currentAccount)
   }
   loginUserInput.value = pinUserInput.value = "" ; 
 });
+
+
+/////// transfert functionnality  :::: 
+   
+transfertButton.addEventListener("click",function(event){
+event.preventDefault(); 
+////// balance of current user >= amount to transfert & reciver should be true & 
+// reciver should be differnt of current user & amount differnet of 0
+const reciever = accounts.find((acc)=>acc.userName === transfertToInput.value)
+
+const amount = Number(transfertAmountInput.value) ;
+const balance = currentAccount.credit
+if (balance>=amount && reciever && reciever.userName !== currentAccount.userName && amount >0 ){
+  currentAccount.movements.push(-amount) ; 
+  reciever.movements.push(amount) ; 
+updateUi(currentAccount)
+}
+transfertToInput.value = transfertAmountInput.value = "" ; 
+
+
+})
+
+
+////// close functionnality :: 
+
+closeButton.addEventListener("click",function(e){
+  e.preventDefault();
+ const accountToClose = closeUserInput.value ; 
+ const accountPinToClose = Number(closePinInput.value) ; 
+ if (currentAccount.userName === accountToClose && currentAccount.pin === accountPinToClose){
+
+  const index = accounts.findIndex((ele)=>ele.userName === accountToClose)
+
+  accounts.splice(index,1)
+  mainPage.style.opacity = 0 ; 
+  welcomeMessage.textContent = "log in to get started" ; 
+ }
+  closeUserInput.value = closeUserInput.value = "" ; 
+
+})
 
 //////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////lectures :::::::::::::::///////////////////////////////////////////////////
@@ -373,3 +438,15 @@ const dataBase = [
 // console.log(result)
 
 //// ? optional chaining ..
+
+
+
+/////// indexof () 
+
+const arr = [1,23,4] ; 
+// const index = arr.indexOf(1) ; 
+// console.log("index:",index) ; 
+
+
+// const index = arr.findIndex((ele)=>ele === 23)
+// console.log(index) ; 
