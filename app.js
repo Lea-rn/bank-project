@@ -59,6 +59,17 @@ const closeUserInput = document.querySelector(".close-input") ;
 const closePinInput = document.querySelector(".close-pin") ;
 const closeButton = document.querySelector(".btn-close") ; 
 
+/// import loan element ::: 
+
+
+const loanInput = document.querySelector(".loan-input") ; 
+const loanButton = document.querySelector(".loan-btn") ; 
+
+////// import sort element :: 
+const sortBtn = document.querySelector(".sort") ;
+
+
+
 
 
 
@@ -72,10 +83,12 @@ const closeButton = document.querySelector(".btn-close") ;
 // const text = movementContainer.textContent
 // console.log("text : ", text)
 
-const displayMovements = function (acc) {
+const displayMovements = function (acc,sort = false) {
   movementContainer.innerHTML = "";
+console.log("sort par defaut ," , sort)
+  const movs = sort ? acc.movements.slice().sort((a,b)=>a-b) : acc.movements
 
-  acc.movements.forEach(function (mov, i) {
+  movs.forEach(function (mov, i) {
     let type = mov > 0 ? "deposit" : "withdrow";
     let html = `
                <div class="${type}-info">
@@ -201,6 +214,22 @@ transfertToInput.value = transfertAmountInput.value = "" ;
 })
 
 
+
+///// loan functionnality ::: 
+loanButton.addEventListener("click",function(){
+const amount = Number(loanInput.value) ; 
+ 
+
+
+if (amount > 0  && currentAccount.movements.some((ele)=> ele > 0.1*amount)){
+
+currentAccount.movements.push(amount) ; 
+updateUi(currentAccount)
+}
+loanInput.value = "" ; 
+})
+
+
 ////// close functionnality :: 
 
 closeButton.addEventListener("click",function(e){
@@ -217,6 +246,15 @@ closeButton.addEventListener("click",function(e){
  }
   closeUserInput.value = closeUserInput.value = "" ; 
 
+})
+
+///// sort functionnality :: 
+let sorted = false ; 
+
+sortBtn.addEventListener("click",function(){
+  console.log("sorted value :" ,sorted) ; 
+displayMovements(currentAccount, !sorted )
+sorted = !sorted ; 
 })
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -412,20 +450,20 @@ closeButton.addEventListener("click",function(e){
 
 //  console.log(result)
 
-const dataBase = [
-  {
-    userName: "eya",
-    image: "photo1",
-  },
-  {
-    userName: "marwa",
-    image: "photo2",
-  },
-  {
-    userName: "nessrine",
-    image: "photo3",
-  },
-];
+// const dataBase = [
+//   {
+//     userName: "eya",
+//     image: "photo1",
+//   },
+//   {
+//     userName: "marwa",
+//     image: "photo2",
+//   },
+//   {
+//     userName: "nessrine",
+//     image: "photo3",
+//   },
+// ];
 
 // const userName =  [] ;
 // dataBase.forEach((ele)=>{
@@ -443,10 +481,47 @@ const dataBase = [
 
 /////// indexof () 
 
-const arr = [1,23,4] ; 
+// const arr = [1,23,4] ; 
 // const index = arr.indexOf(1) ; 
 // console.log("index:",index) ; 
 
 
 // const index = arr.findIndex((ele)=>ele === 23)
 // console.log(index) ; 
+
+
+// const numbers = [10,2,22,50,100,150] ; 
+
+///// includes ::: 
+
+// console.log(numbers.includes(22))   
+// console.log(numbers.includes(220))
+
+///// some and every 
+
+//// some :: 
+// const resultt = numbers.some((ele)=>ele > 150 )  //// fama chkoun akber men 150 !!  ; 
+// console.log("some result : " , resultt)
+
+///// every ::: 
+ 
+// const result = numbers.every((ele)=>ele>3) ;    ///// les elements el kol akber me 3 !!
+// console.log("every::" , result) ; 
+
+
+
+////////////// sort /// 
+
+// const names = ["nessrine" , "eya" , "marwa" , "achref"]
+
+// console.log(names) 
+
+// names.sort() ; 
+
+// console.log(names) 
+
+
+// const numbers  = account1.movements ; 
+// console.log(numbers)
+// numbers.sort((a,b)=>b-a) ; 
+// console.log(numbers) ;

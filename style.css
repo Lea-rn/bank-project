@@ -354,3 +354,7 @@ close box  ::  */
 .time{
     font-weight: 700;
 }
+
+.sort{
+    cursor: pointer;
+}
